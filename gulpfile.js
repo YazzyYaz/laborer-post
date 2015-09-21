@@ -53,13 +53,13 @@ gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
  */
 gulp.task('sass', function () {
     console.log('Running Sass');
-    return gulp.src('_scss/main.scss')
+    return gulp.src('_source/sass/main.scss')
         .pipe(sass())
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(minifycss())
         .pipe(rename('main.min.css'))
-        .pipe(gulp.dest('css'))
-        .pipe(gulp.dest('_includes'))
+        .pipe(gulp.dest('_site/css'))
+        .pipe(gulp.dest('_site/_includes'))
         .pipe(browserSync.reload({stream:true}));
 });
 

@@ -15,3 +15,7 @@ markdown: kramdown
 
 source: ./_source
 destination: ./_site
+
+sass:
+    sass_dir: _sass
+    style: compressed
