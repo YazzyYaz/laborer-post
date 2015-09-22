@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "bootstrap": "^3.3.4",
     "browser-sync": "^2.6.9",
     "critical": "^0.5.7",
     "del": "^1.1.1",
@@ -23,6 +24,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",
     "gulp-scss-lint": "^0.1.6",
+    "gulp-uncss": "^1.0.3",
     "gulp-util": "^3.0.4",
     "imagemin-pngquant": "^4.2.0",
     "ngrok": "^0.1.99",

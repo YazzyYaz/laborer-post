@@ -1,4 +1,6 @@
+'use-strict';
 var gulp        = require('gulp');
+var uncss = require('gulp-uncss');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var prefix      = require('gulp-autoprefixer');
@@ -63,12 +65,14 @@ gulp.task('sass', function () {
         .pipe(browserSync.reload({stream:true}));
 });
 
-/**
- * Deploy to Gh-Pages
- */
-gulp.task("deploy", ["jekyll-build"], function () {
-    return gulp.src("./_site/**/*")
-        .pipe(deploy());
+gulp.task('uncss', function() {
+  return gulp.src('_site/css/main.css')
+    .pipe(uncss({
+      html: [
+        '_site/index.html'
+      ]
+    }))
+    .pipe(gulp.dest(''));
 });
 
 /**
@@ -99,17 +103,15 @@ gulp.task('scss-lint', function() {
  * Page Speed Insights
  */
 gulp.task('psi-desktop', function (cb) {
-    psi({
+    psi.output(site, {
         nokey: 'true',
-        url: site,
         strategy: 'desktop',
     }, cb);
 });
 
 gulp.task('psi-mobile', function (cb) {
-    psi({
+    psi.output(site, {
         nokey: 'true',
-        url: site,
         strategy: 'mobile',
     }, cb);
 });
@@ -145,6 +147,14 @@ gulp.task('psi-seq', function (cb) {
     'ngrok-url',
     'psi-desktop',
     'psi-mobile',
+    cb
+ );
+});
+
+gulp.task('clean-up', function (cb) {
+ return sequence(
+    'browser-sync',
+    'uncss',
     cb
  );
 });
